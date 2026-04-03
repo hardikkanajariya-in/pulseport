@@ -8,7 +8,7 @@ Thank you for considering contributing to PulsePort! This document explains how 
    - Visual Studio 2022 with C++ Desktop workload
    - CMake 3.25+
    - vcpkg (set `VCPKG_ROOT` environment variable)
-   - Node.js 22+ and npm
+   - Node.js 22+ and pnpm 10+
    - Git
 
 2. **Clone and build**
@@ -17,7 +17,7 @@ Thank you for considering contributing to PulsePort! This document explains how 
    cd pulseport
 
    # Frontend
-   cd web && npm install && npm run build && cd ..
+   cd web && pnpm install && pnpm run build && cd ..
 
    # Backend
    cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake
@@ -31,7 +31,7 @@ Thank you for considering contributing to PulsePort! This document explains how 
 
 4. **Frontend dev server** (with API proxy to backend)
    ```bash
-   cd web && npm run dev
+   cd web && pnpm run dev
    ```
 
 ## Code Style

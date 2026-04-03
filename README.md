@@ -31,7 +31,7 @@ git clone https://github.com/your-org/pulseport.git
 cd pulseport
 
 # Build frontend
-cd web && npm install && npm run build && cd ..
+cd web && pnpm install && pnpm run build && cd ..
 
 # Build backend
 cmake --preset default

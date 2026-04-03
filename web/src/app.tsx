@@ -25,7 +25,7 @@ export function App() {
 
   return (
     <div class="app">
-      <Nav currentPage={page} onNavigate={setPage} />
+      <Nav currentPage={page} onNavigate={(p) => setPage(p as Page)} />
       <main class="main-content">
         {renderPage()}
       </main>
