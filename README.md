@@ -27,7 +27,7 @@ PulsePort is a lightweight Windows service that collects CPU, memory, disk, netw
 
 ```bash
 # Clone
-git clone https://github.com/your-org/pulseport.git
+git clone https://github.com/hardikkanajariya-in/pulseport.git
 cd pulseport
 
 # Build frontend
@@ -104,6 +104,20 @@ Default config lives at `config.json` next to the executable (or `%ProgramData%\
 - ~50 MB disk for the application
 - ~400 MB/year for metric history (with default retention)
 
+## Author
+
+**Hardik Kanajariya** — Full Stack Developer & Digital Solutions Expert
+
+- Website: [hardikkanajariya.in](https://hardikkanajariya.in)
+- GitHub: [@hardik-kanajariya](https://github.com/hardik-kanajariya)
+- LinkedIn: [hardik-kanajariya](https://www.linkedin.com/in/hardik-kanajariya/)
+- Twitter: [@hardik_web](https://x.com/hardik_web)
+- Email: [hkdevs@hardikkanajariya.in](mailto:hkdevs@hardikkanajariya.in)
+
 ## License
 
 MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+Made with ❤️ in India by [Hardik Kanajariya](https://hardikkanajariya.in)

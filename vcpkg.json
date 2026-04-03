@@ -1,7 +1,9 @@
 {
   "name": "pulseport",
   "version": "0.1.0",
-  "description": "Local observability service for Windows",
+  "description": "Real-time Windows system telemetry with a local web dashboard",
+  "homepage": "https://github.com/hardikkanajariya-in/pulseport",
+  "license": "MIT",
   "dependencies": [
     "cpp-httplib",
     "sqlite3",

@@ -13,7 +13,7 @@ Thank you for considering contributing to PulsePort! This document explains how 
 
 2. **Clone and build**
    ```bash
-   git clone https://github.com/your-org/pulseport.git
+   git clone https://github.com/hardikkanajariya-in/pulseport.git
    cd pulseport
 
    # Frontend

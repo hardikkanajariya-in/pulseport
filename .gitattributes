@@ -1,0 +1,3 @@
+[attr]linguist-vendored
+web/pnpm-lock.yaml linguist-generated
+web/dist/** linguist-generated

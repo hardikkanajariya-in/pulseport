@@ -17,7 +17,7 @@ PulsePort binds to `127.0.0.1` by default and is designed for local-only access.
 If you discover a security vulnerability, please report it responsibly:
 
 1. **Do NOT open a public issue**
-2. Email the maintainers at [security contact TBD] with:
+2. Email [hkdevs@hardikkanajariya.in](mailto:hkdevs@hardikkanajariya.in) with:
    - Description of the vulnerability
    - Steps to reproduce
    - Potential impact

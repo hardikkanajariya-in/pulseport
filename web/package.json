@@ -2,6 +2,18 @@
   "name": "pulseport-web",
   "private": true,
   "version": "0.1.0",
+  "description": "PulsePort web dashboard — real-time Windows system telemetry",
+  "author": {
+    "name": "Hardik Kanajariya",
+    "email": "hkdevs@hardikkanajariya.in",
+    "url": "https://hardikkanajariya.in"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hardikkanajariya-in/pulseport.git",
+    "directory": "web"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
