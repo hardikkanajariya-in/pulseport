@@ -28,7 +28,6 @@ public:
     /// Evaluate current metrics against thresholds. Call every 60s.
     void evaluate(const MetricRegistry& registry);
 
-    /// Update thresholds at runtime.
     void set_thresholds(const Thresholds& t);
 
 private:

@@ -18,25 +18,20 @@ public:
     /// Write current metric snapshot (upsert metric_current).
     void write_current(const std::vector<MetricSample>& samples);
 
-    /// Write 1-minute aggregates.
     void write_1m(const std::vector<MetricAggregate>& aggregates);
 
-    /// Write 15-minute aggregates.
     void write_15m(const std::vector<MetricAggregate>& aggregates);
 
-    /// Write or update daily energy record.
     void write_energy_daily(const std::string& day_local,
                             double energy_wh, double avg_power_w,
                             double peak_power_w, double charge_wh,
                             double discharge_wh, int active_seconds,
                             Quality quality, bool finalized);
 
-    /// Write an event.
     void write_event(int64_t ts, const std::string& severity,
                      const std::string& category, const std::string& title,
                      const std::string& payload_json = "");
 
-    /// Register metric info in metric_registry.
     void write_metric_info(const MetricInfo& info);
 
 private:
@@ -49,14 +44,12 @@ class StorageReader {
 public:
     explicit StorageReader(sqlite3* db);
 
-    /// Query 1m or 15m history for a metric within a time range.
     std::vector<MetricAggregate> query_history(
         const std::string& table,
         const std::string& metric_key,
         int64_t start_ts, int64_t end_ts,
         int limit = 10000) const;
 
-    /// Query daily energy records.
     struct DailyEnergy {
         std::string day_local;
         double energy_wh;

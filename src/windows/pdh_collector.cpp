@@ -13,7 +13,6 @@ namespace pulseport {
 
 #ifdef _WIN32
 
-// ── PDH query handles (module-level, initialized once) ──────────
 
 static PDH_HQUERY  s_query = nullptr;
 static PDH_HCOUNTER s_cpu_total = nullptr;
@@ -27,12 +26,10 @@ static PDH_HCOUNTER s_disk_write = nullptr;
 static PDH_HCOUNTER s_net_recv = nullptr;
 static PDH_HCOUNTER s_net_send = nullptr;
 
-// Per-core CPU counters
 static std::vector<PDH_HCOUNTER> s_cpu_cores;
 static int s_core_count = 0;
 
 void register_pdh_collectors(MetricRegistry& registry) {
-    // Register metric metadata
     registry.register_metric({"cpu.total_pct", "CPU Total", "%", "pdh", "cpu"});
     registry.register_metric({"mem.available_mb", "Memory Available", "MB", "pdh", "memory"});
     registry.register_metric({"mem.used_pct", "Memory Used", "%", "computed", "memory"});
@@ -45,7 +42,6 @@ void register_pdh_collectors(MetricRegistry& registry) {
     registry.register_metric({"net.recv_bps", "Network Receive", "B/s", "pdh", "network"});
     registry.register_metric({"net.send_bps", "Network Send", "B/s", "pdh", "network"});
 
-    // Per-core CPU: detect core count and register metrics
     SYSTEM_INFO si{};
     GetSystemInfo(&si);
     s_core_count = static_cast<int>(si.dwNumberOfProcessors);
@@ -55,14 +51,12 @@ void register_pdh_collectors(MetricRegistry& registry) {
         registry.register_metric({key, name, "%", "pdh", "cpu"});
     }
 
-    // Open PDH query
     PDH_STATUS status = PdhOpenQueryW(nullptr, 0, &s_query);
     if (status != ERROR_SUCCESS) {
         spdlog::error("PdhOpenQuery failed: 0x{:08X}", status);
         return;
     }
 
-    // Add counters
     auto add_counter = [](const wchar_t* path, PDH_HCOUNTER* counter) {
         PDH_STATUS s = PdhAddEnglishCounterW(s_query, path, 0, counter);
         if (s != ERROR_SUCCESS) {
@@ -82,7 +76,6 @@ void register_pdh_collectors(MetricRegistry& registry) {
     add_counter(L"\\Network Interface(*)\\Bytes Received/sec", &s_net_recv);
     add_counter(L"\\Network Interface(*)\\Bytes Sent/sec", &s_net_send);
 
-    // Per-core CPU counters
     s_cpu_cores.resize(s_core_count, nullptr);
     for (int i = 0; i < s_core_count; ++i) {
         std::wstring path = L"\\Processor(" + std::to_wstring(i) + L")\\% Processor Time";
@@ -131,7 +124,6 @@ void collect_pdh(MetricRegistry& registry) {
     read_double(s_net_recv, "net.recv_bps", "B/s");
     read_double(s_net_send, "net.send_bps", "B/s");
 
-    // Per-core CPU
     for (int i = 0; i < s_core_count; ++i) {
         if (!s_cpu_cores[i]) continue;
         status = PdhGetFormattedCounterValue(s_cpu_cores[i], PDH_FMT_DOUBLE, nullptr, &val);
@@ -141,7 +133,6 @@ void collect_pdh(MetricRegistry& registry) {
         }
     }
 
-    // Compute memory used percentage
     MEMORYSTATUSEX memInfo;
     memInfo.dwLength = sizeof(memInfo);
     if (GlobalMemoryStatusEx(&memInfo)) {

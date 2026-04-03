@@ -28,7 +28,7 @@ using json = nlohmann::json;
 
 namespace pulseport {
 
-// ── Base64 & SHA1 for WebSocket handshake ───────────────────────
+// Base64 encoding
 
 static const char kBase64Chars[] =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -100,7 +100,7 @@ static std::string ws_accept_key(const std::string& client_key) {
     return base64_encode(hash, 20);
 }
 
-// ── WebSocket frame helpers ─────────────────────────────────────
+// WebSocket frame helpers
 
 static bool ws_send_text(SOCKET sock, const std::string& msg) {
     size_t len = msg.size();
@@ -128,8 +128,6 @@ static void ws_send_ping(SOCKET sock) {
     send(sock, reinterpret_cast<const char*>(frame), 2, 0);
 }
 
-// ── JSON helpers ────────────────────────────────────────────────
-
 static json sample_to_json(const MetricSample& s) {
     return {
         {"key",     s.key},
@@ -152,16 +150,12 @@ static json aggregate_to_json(const MetricAggregate& a) {
     };
 }
 
-// ── WebSocket Client ────────────────────────────────────────────
-
 struct WsClient {
     SOCKET sock;
     std::mutex send_mutex;
     std::atomic<bool> alive{true};
     std::jthread reader_thread;
 };
-
-// ── Implementation ──────────────────────────────────────────────
 
 struct HttpServer::Impl {
     httplib::Server svr;
@@ -211,9 +205,7 @@ struct HttpServer::Impl {
             return;
         }
 
-        // Get the underlying socket from the request
-        // cpp-httplib doesn't expose the socket directly for upgrade,
-        // so we respond with 101 and let the pre-routing handler take over.
+        // cpp-httplib doesn't expose the socket directly for upgrade
         std::string accept = ws_accept_key(ws_key);
         res.status = 101;
         res.set_header("Upgrade", "websocket");
@@ -227,7 +219,6 @@ struct HttpServer::Impl {
     }
 
     void setup_api_routes() {
-        // Health
         svr.Get("/api/v1/health", [this](const httplib::Request&, httplib::Response& res) {
             auto& sm = self_metrics();
             json body = {
@@ -238,7 +229,6 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // System info
         svr.Get("/api/v1/system/info", [this](const httplib::Request&, httplib::Response& res) {
             auto metrics = registry.all_metrics();
             json caps = json::array();
@@ -252,14 +242,12 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // Live snapshot (with rolling power averages)
         svr.Get("/api/v1/live/snapshot", [this](const httplib::Request&, httplib::Response& res) {
             auto snap = registry.snapshot();
             json metrics = json::array();
             for (const auto& s : snap) {
                 metrics.push_back(sample_to_json(s));
             }
-            // Append rolling power averages from PowerPipeline
             if (power_pipeline) {
                 int64_t ts = now_unix();
                 auto q = power_pipeline->current_quality();
@@ -278,7 +266,6 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // History query
         svr.Get("/api/v1/history", [this](const httplib::Request& req, httplib::Response& res) {
             auto metric_key = req.get_param_value("metric");
             auto table      = req.get_param_value("resolution");
@@ -320,7 +307,6 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // Daily energy
         svr.Get("/api/v1/energy/daily", [this](const httplib::Request& req, httplib::Response& res) {
             auto start_day = req.get_param_value("start");
             auto end_day   = req.get_param_value("end");
@@ -348,7 +334,6 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // Events
         svr.Get("/api/v1/events", [this](const httplib::Request& req, httplib::Response& res) {
             auto start_str = req.get_param_value("start");
             auto end_str   = req.get_param_value("end");
@@ -382,7 +367,6 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // Delete history
         svr.Post("/api/v1/history/delete", [this](const httplib::Request& req, httplib::Response& res) {
             auto origin = req.get_header_value("Origin");
             if (!origin.empty() && origin.find("127.0.0.1") == std::string::npos
@@ -424,7 +408,6 @@ struct HttpServer::Impl {
             }
         });
 
-        // Diagnostics
         svr.Get("/api/v1/diagnostics", [this](const httplib::Request&, httplib::Response& res) {
             auto& sm = self_metrics();
             sm.db_size_bytes  = database.file_size_bytes();
@@ -446,7 +429,6 @@ struct HttpServer::Impl {
             res.set_content(body.dump(), "application/json");
         });
 
-        // Config update
         svr.Post("/api/v1/config", [this](const httplib::Request& req, httplib::Response& res) {
             auto origin = req.get_header_value("Origin");
             if (!origin.empty() && origin.find("127.0.0.1") == std::string::npos
@@ -471,7 +453,6 @@ struct HttpServer::Impl {
                 return;
             }
 
-            // Validate and apply only whitelisted fields
             auto apply_double = [&](const char* key, double& target, double min_v, double max_v) {
                 if (body.contains(key)) {
                     double v = body[key].get<double>();
@@ -497,7 +478,6 @@ struct HttpServer::Impl {
             apply_int("retention_daily_days", config_ptr->retention_daily_days, 1, 3650);
             apply_int("retention_events_days", config_ptr->retention_events_days, 1, 3650);
 
-            // Persist
             if (!config_path.empty()) {
                 save_config(*config_ptr, config_path);
             }
@@ -508,7 +488,6 @@ struct HttpServer::Impl {
             res.set_content(result.dump(), "application/json");
         });
 
-        // Get config (read-only)
         svr.Get("/api/v1/config", [this](const httplib::Request&, httplib::Response& res) {
             if (!config_ptr) {
                 res.status = 503;

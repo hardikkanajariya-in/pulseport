@@ -29,23 +29,17 @@ public:
     /// Signal the server to stop. Thread-safe.
     void stop();
 
-    /// Set the directory to serve static frontend files from.
     void set_web_dir(const std::string& dir);
 
-    /// Get count of active WebSocket connections.
     int ws_connection_count() const;
 
-    /// Broadcast a delta message to all connected WebSocket clients.
     void broadcast_delta(const std::vector<MetricSample>& samples);
 
-    /// Broadcast an event notification to all connected WebSocket clients.
     void broadcast_event(const std::string& severity, const std::string& category,
                          const std::string& title);
 
-    /// Set the PowerPipeline reference for rolling averages.
     void set_power_pipeline(PowerPipeline* pipeline);
 
-    /// Set mutable config reference for config POST endpoint.
     void set_config(Config* cfg, const std::string& config_path);
 
 private:

@@ -30,18 +30,16 @@ void AlertEvaluator::check_threshold(
 
     if (st.violation_count < sustained_minutes) return;
 
-    // Check cooldown
     int64_t now = now_unix();
     int64_t cooldown_s = static_cast<int64_t>(thresholds_.cooldown_minutes) * 60;
     if (st.last_alert_ts > 0 && (now - st.last_alert_ts) < cooldown_s) {
         return;
     }
 
-    // Emit alert event
     std::string title = fmt::format(fmt::runtime(alert_title_fmt), value);
     writer_.write_event(now, "warn", alert_category, title);
     st.last_alert_ts = now;
-    st.violation_count = 0; // reset after firing
+    st.violation_count = 0;
 
     spdlog::warn("Alert fired: {} (value={:.1f})", alert_category, value);
 }

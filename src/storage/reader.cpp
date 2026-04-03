@@ -146,7 +146,6 @@ int StorageReader::delete_history(const std::string& table,
 
     int deleted = sqlite3_changes(db_);
 
-    // Audit trail
     const char* audit_sql = R"(
         INSERT INTO deletions_audit (scope, range_start, range_end, note)
         VALUES (?, ?, ?, ?)
@@ -178,7 +177,6 @@ int StorageReader::delete_all_history() {
         total += sqlite3_changes(db_);
     }
 
-    // Audit
     const char* audit_sql = R"(
         INSERT INTO deletions_audit (scope, note)
         VALUES ('all_history', ?)
@@ -227,7 +225,6 @@ int StorageReader::cleanup_expired(const RetentionConfig& rc) {
     // energy_daily uses ISO date string, compare differently
     if (rc.retention_daily_days > 0) {
         int64_t cutoff_ts = now - static_cast<int64_t>(rc.retention_daily_days) * 86400;
-        // Convert cutoff to ISO date string
         time_t t = static_cast<time_t>(cutoff_ts);
         struct tm tm_buf{};
         localtime_s(&tm_buf, &t);
@@ -248,7 +245,6 @@ int StorageReader::cleanup_expired(const RetentionConfig& rc) {
         }
     }
 
-    // Audit trail
     if (total_deleted > 0) {
         const char* audit_sql = R"(
             INSERT INTO deletions_audit (scope, note)

@@ -54,7 +54,6 @@ export function Settings() {
 
       {config ? (
         <>
-          {/* Alert Thresholds */}
           <div class="card" style="margin-bottom: 16px;">
             <div class="card-header">
               <span class="card-title">Alert Thresholds</span>
@@ -105,7 +104,6 @@ export function Settings() {
             </div>
           </div>
 
-          {/* Data Retention */}
           <div class="card" style="margin-bottom: 16px;">
             <div class="card-header">
               <span class="card-title">Data Retention</span>

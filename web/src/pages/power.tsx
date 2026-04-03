@@ -22,12 +22,10 @@ export function Power() {
   const charging = getMetric('battery.charging');
   const remaining = getMetric('battery.remaining_min');
 
-  // Rolling power averages from API
   const avg1m = getMetric('power.avg_1m_w');
   const avg5m = getMetric('power.avg_5m_w');
   const avg15m = getMetric('power.avg_15m_w');
 
-  // Energy range
   const rangeDays = energyRange === 'week' ? 7 : 30;
   const today = new Date().toISOString().slice(0, 10);
   const startDate = new Date(Date.now() - rangeDays * 86400000).toISOString().slice(0, 10);
@@ -70,7 +68,6 @@ export function Power() {
         />
       </div>
 
-      {/* Rolling power averages */}
       <div class="grid grid-4" style="margin-bottom: 16px;">
         <MetricTile
           label="Avg (1 min)"
@@ -92,7 +89,6 @@ export function Power() {
         />
       </div>
 
-      {/* Energy trends with tabs */}
       <div class="card" style="margin-bottom: 16px;">
         <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
           <span class="card-title">Energy Trends</span>

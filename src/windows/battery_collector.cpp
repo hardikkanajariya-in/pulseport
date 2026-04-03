@@ -111,18 +111,15 @@ void collect_battery(MetricRegistry& registry) {
 
     int64_t ts = now_unix();
 
-    // AC status
     bool ac_online = (sps.ACLineStatus == 1);
     registry.push_sample({"battery.ac_online", ac_online ? 1.0 : 0.0,
                            "bool", Quality::Measured, ts});
 
-    // Battery level
     if (sps.BatteryLifePercent != 255) {
         double level = static_cast<double>(sps.BatteryLifePercent);
         registry.push_sample({"battery.level_pct", level, "%", Quality::Measured, ts});
     }
 
-    // Charging status
     bool charging = (sps.BatteryFlag & 8) != 0;
     registry.push_sample({"battery.charging", charging ? 1.0 : 0.0,
                            "bool", Quality::Measured, ts});

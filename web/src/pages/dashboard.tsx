@@ -22,7 +22,6 @@ export function Dashboard() {
   const battLevel = getMetric('battery.level_pct');
   const power = getMetric('power.current_w');
 
-  // Discover per-core CPU metrics dynamically
   const coreMetrics = allMetrics
     .filter(m => m.key.startsWith('cpu.core.') && m.key.endsWith('.pct'))
     .sort((a, b) => {

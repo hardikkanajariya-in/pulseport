@@ -120,7 +120,6 @@ export function History() {
         <button class="btn btn-danger" onClick={handleDelete}>Delete Range</button>
       </div>
 
-      {/* Chart visualization with event overlay */}
       {chartData && chartData[0].length > 0 && (
         <div style="margin-bottom: 16px;">
           <Chart

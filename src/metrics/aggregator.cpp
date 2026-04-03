@@ -54,7 +54,6 @@ void Aggregator::accumulate(const MetricSample& sample) {
 
     int64_t bts = bucket_1m(sample.ts);
 
-    // If bucket changed, flush old buckets
     if (current_bucket_ts_ != 0 && bts != current_bucket_ts_) {
         flush_1m();
     }
@@ -80,7 +79,6 @@ void Aggregator::flush_1m() {
                        aggregates.size(), current_bucket_ts_);
     }
 
-    // Reset all buckets
     for (auto& [key, bucket] : buckets_) {
         bucket.reset();
     }
@@ -130,7 +128,6 @@ void Aggregator::flush_15m(StorageReader& reader) {
 }
 
 void Aggregator::finalize_daily(const std::string& day_local, StorageReader& reader) {
-    // Parse day_local "YYYY-MM-DD" to get Unix timestamp range
     struct tm tm_buf{};
     int y, mo, d;
     if (sscanf(day_local.c_str(), "%d-%d-%d", &y, &mo, &d) != 3) {
@@ -147,7 +144,6 @@ void Aggregator::finalize_daily(const std::string& day_local, StorageReader& rea
     int64_t start_ts = static_cast<int64_t>(day_start);
     int64_t end_ts = start_ts + 86400;
 
-    // Query 1m power data for the day
     auto power_data = reader.query_history("metric_1m", "power.current_w",
                                             start_ts, end_ts);
 

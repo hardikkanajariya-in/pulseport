@@ -116,7 +116,6 @@ export function Chart({ title, data, series, height = 200, events }: ChartProps)
     };
   }, [events]);
 
-  // Update data when it changes
   useEffect(() => {
     if (chartRef.current && data[0]?.length > 0) {
       chartRef.current.setData(data);
