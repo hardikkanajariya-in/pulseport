@@ -13,8 +13,6 @@
 #include <vector>
 
 #ifdef _WIN32
-#include <winsock2.h>
-#include <ws2tcpip.h>
 #pragma comment(lib, "ws2_32.lib")
 #else
 #include <sys/socket.h>
@@ -151,10 +149,15 @@ static json aggregate_to_json(const MetricAggregate& a) {
 }
 
 struct WsClient {
-    SOCKET sock;
+    SOCKET sock = INVALID_SOCKET;
     std::mutex send_mutex;
     std::atomic<bool> alive{true};
     std::jthread reader_thread;
+
+    WsClient() = default;
+    explicit WsClient(SOCKET s) : sock(s) {}
+    WsClient(const WsClient&) = delete;
+    WsClient& operator=(const WsClient&) = delete;
 };
 
 struct HttpServer::Impl {

@@ -1,0 +1,492 @@
+[1/16] Building CXX object tests\CMakeFiles\pulseport-unit-tests.dir\unit\test_ring_buffer.cpp.obj
+FAILED: tests/CMakeFiles/pulseport-unit-tests.dir/unit/test_ring_buffer.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\_deps\googletest-src\googletest\include -external:ID:\pulseport\build\_deps\googletest-src\googletest -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fotests\CMakeFiles\pulseport-unit-tests.dir\unit\test_ring_buffer.cpp.obj /Fdtests\CMakeFiles\pulseport-unit-tests.dir\ /FS -c D:\pulseport\tests\unit\test_ring_buffer.cpp
+D:\pulseport\tests\unit\test_ring_buffer.cpp(9): error C2440: '<function-style-cast>': cannot convert from 'void' to 'testing::AssertionResult'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(9): note: Expressions of type void cannot be converted to other types
+D:\pulseport\tests\unit\test_ring_buffer.cpp(9): error C2737: 'gtest_ar_': const object must be initialized
+D:\pulseport\tests\unit\test_ring_buffer.cpp(10): error C2440: '<function-style-cast>': cannot convert from 'void' to 'testing::AssertionResult'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(10): note: Expressions of type void cannot be converted to other types
+D:\pulseport\tests\unit\test_ring_buffer.cpp(10): error C2737: 'gtest_ar_': const object must be initialized
+D:\pulseport\tests\unit\test_ring_buffer.cpp(11): error C2440: '<function-style-cast>': cannot convert from 'void' to 'testing::AssertionResult'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(11): note: Expressions of type void cannot be converted to other types
+D:\pulseport\tests\unit\test_ring_buffer.cpp(11): error C2737: 'gtest_ar_': const object must be initialized
+D:\pulseport\tests\unit\test_ring_buffer.cpp(70): error C2039: 'snapshot': is not a member of 'pulseport::RingBuffer<int,8>'
+D:\pulseport\include\pulseport/ring_buffer.h(14): note: see declaration of 'pulseport::RingBuffer<int,8>'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(71): error C3536: 'snap': cannot be used before it is initialized
+D:\pulseport\tests\unit\test_ring_buffer.cpp(71): error C2660: 'testing::internal::EqHelper::Compare': function does not take 3 arguments
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1422): note: see declaration of 'testing::internal::EqHelper::Compare'
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1429): note: could be 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(71): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)': expects 4 arguments - 3 provided
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1410): note: or       'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(71): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+D:\pulseport\tests\unit\test_ring_buffer.cpp(71): note: while trying to match the argument list '(const char [12], const char [3], unsigned int)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): error C2065: 'MetricSample': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): error C2923: 'pulseport::RingBuffer': 'MetricSample' is not a valid template type argument for parameter 'T'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): note: see declaration of 'MetricSample'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): error C2641: cannot deduce template arguments for 'pulseport::RingBuffer'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): note: 'pulseport::RingBuffer': no matching overloaded function found
+D:\pulseport\include\pulseport/ring_buffer.h(18): note: could be 'pulseport::RingBuffer<T,Capacity> pulseport::RingBuffer(void)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): note: 'pulseport::RingBuffer<T,Capacity> pulseport::RingBuffer(void)': could not deduce template argument for 'T'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): note: 'pulseport::RingBuffer<T,Capacity> pulseport::RingBuffer(void)': could not deduce template argument for 'Capacity'
+D:\pulseport\include\pulseport/ring_buffer.h(14): note: or       'pulseport::RingBuffer<T,Capacity> pulseport::RingBuffer(pulseport::RingBuffer<T,Capacity>)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(75): note: 'pulseport::RingBuffer<T,Capacity> pulseport::RingBuffer(pulseport::RingBuffer<T,Capacity>)': expects 1 arguments - 0 provided
+D:\pulseport\tests\unit\test_ring_buffer.cpp(77): error C2065: 'MetricSample': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(77): error C2146: syntax error: missing ';' before identifier 's'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(77): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(78): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(79): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(80): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(81): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(81): error C2653: 'Quality': is not a class or namespace name
+D:\pulseport\tests\unit\test_ring_buffer.cpp(81): error C2065: 'Measured': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(82): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(82): error C3083: 'system_clock': the symbol to the left of a '::' must be a type
+D:\pulseport\tests\unit\test_ring_buffer.cpp(82): error C2039: 'now': is not a member of 'std::chrono'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\__msvc_chrono.hpp(286): note: see declaration of 'std::chrono'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(82): error C3861: 'now': identifier not found
+D:\pulseport\tests\unit\test_ring_buffer.cpp(84): error C2065: 's': undeclared identifier
+D:\pulseport\tests\unit\test_ring_buffer.cpp(86): error C2662: 'std::optional<_Ty> pulseport::RingBuffer<T,Capacity>::latest(void) const': cannot convert 'this' pointer from 'pulseport::RingBuffer' to 'const pulseport::RingBuffer<T,Capacity> &'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(86): note: Reason: cannot convert from 'pulseport::RingBuffer' to 'const pulseport::RingBuffer<T,Capacity>'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(86): note: Conversion requires a second user-defined-conversion operator or constructor
+D:\pulseport\include\pulseport/ring_buffer.h(61): note: see declaration of 'pulseport::RingBuffer<T,Capacity>::latest'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(86): note: while trying to match the argument list '()'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(86): error C2440: 'initializing': cannot convert from 'std::optional<_Ty>' to 'std::optional<_Ty>'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(86): note: Cannot copy construct class 'std::optional<_Ty>' due to ambiguous copy constructors or no available copy constructor
+D:\pulseport\tests\unit\test_ring_buffer.cpp(87): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+D:\pulseport\tests\unit\test_ring_buffer.cpp(87): note: 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest-assertion-result.h(155): note: could be 'testing::AssertionResult::AssertionResult(const T &,std::enable_if<!std::is_convertible<T,testing::AssertionResult>::value,void>::type *)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(87): note: while trying to match the argument list '()'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(87): error C2737: 'gtest_ar_': const object must be initialized
+D:\pulseport\tests\unit\test_ring_buffer.cpp(88): error C2839: invalid return type '_Ty *' for overloaded 'operator ->'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(88): error C2660: 'testing::internal::EqHelper::Compare': function does not take 3 arguments
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1422): note: see declaration of 'testing::internal::EqHelper::Compare'
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1429): note: could be 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(88): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)': expects 4 arguments - 3 provided
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1410): note: or       'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(88): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+D:\pulseport\tests\unit\test_ring_buffer.cpp(88): note: while trying to match the argument list '(const char [12], const char [16], const char [14])'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(89): error C2839: invalid return type '_Ty *' for overloaded 'operator ->'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(89): error C2672: 'testing::internal::CmpHelperFloatingPointEQ': no matching overloaded function found
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1582): note: could be 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(89): note: 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)': expects 4 arguments - 3 provided
+D:\pulseport\tests\unit\test_ring_buffer.cpp(89): error C2737: 'gtest_ar': const object must be initialized
+D:\pulseport\tests\unit\test_ring_buffer.cpp(90): error C2839: invalid return type '_Ty *' for overloaded 'operator ->'
+D:\pulseport\tests\unit\test_ring_buffer.cpp(90): error C2653: 'Quality': is not a class or namespace name
+D:\pulseport\tests\unit\test_ring_buffer.cpp(90): error C2065: 'Measured': undeclared identifier
+[2/16] Building CXX object tests\CMakeFiles\pulseport-unit-tests.dir\unit\test_types.cpp.obj
+FAILED: tests/CMakeFiles/pulseport-unit-tests.dir/unit/test_types.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\_deps\googletest-src\googletest\include -external:ID:\pulseport\build\_deps\googletest-src\googletest -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fotests\CMakeFiles\pulseport-unit-tests.dir\unit\test_types.cpp.obj /Fdtests\CMakeFiles\pulseport-unit-tests.dir\ /FS -c D:\pulseport\tests\unit\test_types.cpp
+D:\pulseport\tests\unit\test_types.cpp(37): error C2039: 'timestamp': is not a member of 'pulseport::MetricSample'
+D:\pulseport\include\pulseport/types.h(56): note: see declaration of 'pulseport::MetricSample'
+D:\pulseport\tests\unit\test_types.cpp(48): error C2039: 'min_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(49): error C2039: 'max_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(50): error C2039: 'avg_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(51): error C2039: 'count': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(53): error C2039: 'count': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(53): error C2660: 'testing::internal::EqHelper::Compare': function does not take 3 arguments
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1422): note: see declaration of 'testing::internal::EqHelper::Compare'
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1429): note: could be 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)'
+D:\pulseport\tests\unit\test_types.cpp(53): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)': expects 4 arguments - 3 provided
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1410): note: or       'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\unit\test_types.cpp(53): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+D:\pulseport\tests\unit\test_types.cpp(53): note: while trying to match the argument list '(const char [10], const char [4], unsigned int)'
+D:\pulseport\tests\unit\test_types.cpp(54): error C2039: 'min_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(54): error C2039: 'avg_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(54): error C2672: 'testing::internal::CmpHelperLE': no matching overloaded function found
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1474): note: could be 'testing::AssertionResult testing::internal::CmpHelperLE(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\unit\test_types.cpp(54): note: 'testing::AssertionResult testing::internal::CmpHelperLE(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 2 provided
+D:\pulseport\tests\unit\test_types.cpp(54): error C2737: 'gtest_ar': const object must be initialized
+D:\pulseport\tests\unit\test_types.cpp(55): error C2039: 'max_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(55): error C2039: 'avg_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\unit\test_types.cpp(55): error C2672: 'testing::internal::CmpHelperGE': no matching overloaded function found
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1478): note: could be 'testing::AssertionResult testing::internal::CmpHelperGE(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\unit\test_types.cpp(55): note: 'testing::AssertionResult testing::internal::CmpHelperGE(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 2 provided
+D:\pulseport\tests\unit\test_types.cpp(55): error C2737: 'gtest_ar': const object must be initialized
+[3/16] Building CXX object tests\CMakeFiles\pulseport-integration-tests.dir\integration\test_database.cpp.obj
+FAILED: tests/CMakeFiles/pulseport-integration-tests.dir/integration/test_database.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\_deps\googletest-src\googletest\include -external:ID:\pulseport\build\_deps\googletest-src\googletest -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fotests\CMakeFiles\pulseport-integration-tests.dir\integration\test_database.cpp.obj /Fdtests\CMakeFiles\pulseport-integration-tests.dir\ /FS -c D:\pulseport\tests\integration\test_database.cpp
+D:\pulseport\tests\integration\test_database.cpp(42): error C2065: 'sqlite3_stmt': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(42): error C2065: 'stmt': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(44): error C2065: 'stmt': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(43): error C3861: 'sqlite3_prepare_v2': identifier not found
+D:\pulseport\tests\integration\test_database.cpp(45): error C2065: 'SQLITE_OK': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(47): error C2065: 'stmt': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(47): error C3861: 'sqlite3_step': identifier not found
+D:\pulseport\tests\integration\test_database.cpp(48): error C2065: 'SQLITE_ROW': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(49): error C2065: 'stmt': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(49): error C3861: 'sqlite3_column_int': identifier not found
+D:\pulseport\tests\integration\test_database.cpp(52): error C2065: 'stmt': undeclared identifier
+D:\pulseport\tests\integration\test_database.cpp(52): error C3861: 'sqlite3_finalize': identifier not found
+D:\pulseport\tests\integration\test_database.cpp(60): error C2039: 'file_size': is not a member of 'pulseport::Database'
+D:\pulseport\include\pulseport/database.h(11): note: see declaration of 'pulseport::Database'
+D:\pulseport\tests\integration\test_database.cpp(61): error C3536: 'size': cannot be used before it is initialized
+[4/16] Building CXX object tests\CMakeFiles\pulseport-integration-tests.dir\integration\test_storage_roundtrip.cpp.obj
+FAILED: tests/CMakeFiles/pulseport-integration-tests.dir/integration/test_storage_roundtrip.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\_deps\googletest-src\googletest\include -external:ID:\pulseport\build\_deps\googletest-src\googletest -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fotests\CMakeFiles\pulseport-integration-tests.dir\integration\test_storage_roundtrip.cpp.obj /Fdtests\CMakeFiles\pulseport-integration-tests.dir\ /FS -c D:\pulseport\tests\integration\test_storage_roundtrip.cpp
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): error C2665: 'pulseport::StorageWriter::StorageWriter': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(40): note: could be 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): note: 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageWriter &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageWriter'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(16): note: or       'pulseport::StorageWriter::StorageWriter(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): note: 'pulseport::StorageWriter::StorageWriter(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(32): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): error C2665: 'pulseport::StorageReader::StorageReader': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(96): note: could be 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)': cannot convert argument 1 from 'pulseport::Database' to 'pulseport::StorageReader &&'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: Reason: cannot convert from 'pulseport::Database' to 'pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(96): note: or       'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: 'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageReader &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(45): note: or       'pulseport::StorageReader::StorageReader(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: 'pulseport::StorageReader::StorageReader(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(33): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(38): error C2039: 'min_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(39): error C2039: 'max_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(40): error C2039: 'avg_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(41): error C2039: 'count': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(48): error C2039: 'avg_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(48): error C2672: 'testing::internal::CmpHelperFloatingPointEQ': no matching overloaded function found
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1582): note: could be 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(48): note: 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)': expects 4 arguments - 3 provided
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(48): error C2737: 'gtest_ar': const object must be initialized
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(49): error C2039: 'min_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(49): error C2672: 'testing::internal::CmpHelperFloatingPointEQ': no matching overloaded function found
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1582): note: could be 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(49): note: 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)': expects 4 arguments - 3 provided
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(49): error C2737: 'gtest_ar': const object must be initialized
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(50): error C2039: 'max_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(50): error C2672: 'testing::internal::CmpHelperFloatingPointEQ': no matching overloaded function found
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1582): note: could be 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(50): note: 'testing::AssertionResult testing::internal::CmpHelperFloatingPointEQ(const char *,const char *,RawType,RawType)': expects 4 arguments - 3 provided
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(50): error C2737: 'gtest_ar': const object must be initialized
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(51): error C2039: 'count': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(51): error C2660: 'testing::internal::EqHelper::Compare': function does not take 3 arguments
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1422): note: see declaration of 'testing::internal::EqHelper::Compare'
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1429): note: could be 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(51): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)': expects 4 arguments - 3 provided
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1410): note: or       'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(51): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(51): note: while trying to match the argument list '(const char [17], const char [4], unsigned int)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): error C2665: 'pulseport::StorageWriter::StorageWriter': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(40): note: could be 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): note: 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageWriter &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageWriter'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(16): note: or       'pulseport::StorageWriter::StorageWriter(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): note: 'pulseport::StorageWriter::StorageWriter(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(55): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): error C2665: 'pulseport::StorageReader::StorageReader': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(96): note: could be 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)': cannot convert argument 1 from 'pulseport::Database' to 'pulseport::StorageReader &&'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: Reason: cannot convert from 'pulseport::Database' to 'pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(96): note: or       'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: 'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageReader &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(45): note: or       'pulseport::StorageReader::StorageReader(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: 'pulseport::StorageReader::StorageReader(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(56): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(58): error C2660: 'pulseport::StorageWriter::write_energy_daily': function does not take 3 arguments
+D:\pulseport\include\pulseport/storage.h(25): note: see declaration of 'pulseport::StorageWriter::write_energy_daily'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(58): note: while trying to match the argument list '(const char [11], double, double)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): error C2665: 'pulseport::StorageWriter::StorageWriter': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(40): note: could be 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): note: 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageWriter &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageWriter'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(16): note: or       'pulseport::StorageWriter::StorageWriter(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): note: 'pulseport::StorageWriter::StorageWriter(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(65): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): error C2665: 'pulseport::StorageReader::StorageReader': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(96): note: could be 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)': cannot convert argument 1 from 'pulseport::Database' to 'pulseport::StorageReader &&'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: Reason: cannot convert from 'pulseport::Database' to 'pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(96): note: or       'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: 'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageReader &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(45): note: or       'pulseport::StorageReader::StorageReader(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: 'pulseport::StorageReader::StorageReader(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(66): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): error C2665: 'pulseport::StorageWriter::StorageWriter': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(40): note: could be 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): note: 'pulseport::StorageWriter::StorageWriter(const pulseport::StorageWriter &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageWriter &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageWriter'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(16): note: or       'pulseport::StorageWriter::StorageWriter(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): note: 'pulseport::StorageWriter::StorageWriter(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(76): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): error C2665: 'pulseport::StorageReader::StorageReader': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/storage.h(96): note: could be 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: 'pulseport::StorageReader::StorageReader(pulseport::StorageReader &&)': cannot convert argument 1 from 'pulseport::Database' to 'pulseport::StorageReader &&'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: Reason: cannot convert from 'pulseport::Database' to 'pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(96): note: or       'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: 'pulseport::StorageReader::StorageReader(const pulseport::StorageReader &)': cannot convert argument 1 from 'pulseport::Database' to 'const pulseport::StorageReader &'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: Reason: cannot convert from 'pulseport::Database' to 'const pulseport::StorageReader'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/storage.h(45): note: or       'pulseport::StorageReader::StorageReader(sqlite3 *)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: 'pulseport::StorageReader::StorageReader(sqlite3 *)': cannot convert argument 1 from 'pulseport::Database' to 'sqlite3 *'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(77): note: while trying to match the argument list '(pulseport::Database)'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(83): error C2039: 'min_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(84): error C2039: 'max_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(85): error C2039: 'avg_val': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+D:\pulseport\tests\integration\test_storage_roundtrip.cpp(86): error C2039: 'count': is not a member of 'pulseport::MetricAggregate'
+D:\pulseport\include\pulseport/types.h(65): note: see declaration of 'pulseport::MetricAggregate'
+[5/16] Building CXX object tests\CMakeFiles\pulseport-unit-tests.dir\unit\test_migration_runner.cpp.obj
+FAILED: tests/CMakeFiles/pulseport-unit-tests.dir/unit/test_migration_runner.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\_deps\googletest-src\googletest\include -external:ID:\pulseport\build\_deps\googletest-src\googletest -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fotests\CMakeFiles\pulseport-unit-tests.dir\unit\test_migration_runner.cpp.obj /Fdtests\CMakeFiles\pulseport-unit-tests.dir\ /FS -c D:\pulseport\tests\unit\test_migration_runner.cpp
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): error C2440: 'initializing': cannot convert from 'std::string' to 'pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: 'pulseport::MigrationRunner::MigrationRunner': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/migration_runner.h(35): note: could be 'pulseport::MigrationRunner::MigrationRunner(pulseport::MigrationRunner &&)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: 'pulseport::MigrationRunner::MigrationRunner(pulseport::MigrationRunner &&)': cannot convert argument 1 from 'std::string' to 'pulseport::MigrationRunner &&'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: Reason: cannot convert from 'std::string' to 'pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/migration_runner.h(35): note: or       'pulseport::MigrationRunner::MigrationRunner(const pulseport::MigrationRunner &)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: 'pulseport::MigrationRunner::MigrationRunner(const pulseport::MigrationRunner &)': cannot convert argument 1 from 'std::string' to 'const pulseport::MigrationRunner &'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: Reason: cannot convert from 'std::string' to 'const pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\unit\test_migration_runner.cpp(34): note: while trying to match the argument list '(std::string)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(35): error C2660: 'pulseport::MigrationRunner::discover': function does not take 0 arguments
+D:\pulseport\include\pulseport/migration_runner.h(22): note: see declaration of 'pulseport::MigrationRunner::discover'
+D:\pulseport\tests\unit\test_migration_runner.cpp(35): note: while trying to match the argument list '()'
+D:\pulseport\tests\unit\test_migration_runner.cpp(39): error C2039: 'name': is not a member of 'pulseport::MigrationRunner::MigrationFile'
+D:\pulseport\include\pulseport/migration_runner.h(14): note: see declaration of 'pulseport::MigrationRunner::MigrationFile'
+D:\pulseport\tests\unit\test_migration_runner.cpp(39): error C2660: 'testing::internal::EqHelper::Compare': function does not take 3 arguments
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1422): note: see declaration of 'testing::internal::EqHelper::Compare'
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1429): note: could be 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(39): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,std::nullptr_t,T *)': expects 4 arguments - 3 provided
+D:\pulseport\build\_deps\googletest-src\googletest\include\gtest/gtest.h(1410): note: or       'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(39): note: 'testing::AssertionResult testing::internal::EqHelper::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+D:\pulseport\tests\unit\test_migration_runner.cpp(39): note: while trying to match the argument list '(const char [14], const char [7], const char [5])'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): error C2440: 'initializing': cannot convert from 'std::string' to 'pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: 'pulseport::MigrationRunner::MigrationRunner': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/migration_runner.h(35): note: could be 'pulseport::MigrationRunner::MigrationRunner(pulseport::MigrationRunner &&)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: 'pulseport::MigrationRunner::MigrationRunner(pulseport::MigrationRunner &&)': cannot convert argument 1 from 'std::string' to 'pulseport::MigrationRunner &&'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: Reason: cannot convert from 'std::string' to 'pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/migration_runner.h(35): note: or       'pulseport::MigrationRunner::MigrationRunner(const pulseport::MigrationRunner &)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: 'pulseport::MigrationRunner::MigrationRunner(const pulseport::MigrationRunner &)': cannot convert argument 1 from 'std::string' to 'const pulseport::MigrationRunner &'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: Reason: cannot convert from 'std::string' to 'const pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\unit\test_migration_runner.cpp(43): note: while trying to match the argument list '(std::string)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(44): error C2660: 'pulseport::MigrationRunner::discover': function does not take 0 arguments
+D:\pulseport\include\pulseport/migration_runner.h(22): note: see declaration of 'pulseport::MigrationRunner::discover'
+D:\pulseport\tests\unit\test_migration_runner.cpp(44): note: while trying to match the argument list '()'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): error C2440: 'initializing': cannot convert from 'std::string' to 'pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: 'pulseport::MigrationRunner::MigrationRunner': no overloaded function could convert all the argument types
+D:\pulseport\include\pulseport/migration_runner.h(35): note: could be 'pulseport::MigrationRunner::MigrationRunner(pulseport::MigrationRunner &&)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: 'pulseport::MigrationRunner::MigrationRunner(pulseport::MigrationRunner &&)': cannot convert argument 1 from 'std::string' to 'pulseport::MigrationRunner &&'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: Reason: cannot convert from 'std::string' to 'pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\include\pulseport/migration_runner.h(35): note: or       'pulseport::MigrationRunner::MigrationRunner(const pulseport::MigrationRunner &)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: 'pulseport::MigrationRunner::MigrationRunner(const pulseport::MigrationRunner &)': cannot convert argument 1 from 'std::string' to 'const pulseport::MigrationRunner &'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: Reason: cannot convert from 'std::string' to 'const pulseport::MigrationRunner'
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\pulseport\tests\unit\test_migration_runner.cpp(62): note: while trying to match the argument list '(std::string)'
+D:\pulseport\tests\unit\test_migration_runner.cpp(63): error C2660: 'pulseport::MigrationRunner::discover': function does not take 0 arguments
+D:\pulseport\include\pulseport/migration_runner.h(22): note: see declaration of 'pulseport::MigrationRunner::discover'
+D:\pulseport\tests\unit\test_migration_runner.cpp(63): note: while trying to match the argument list '()'
+[6/16] Building CXX object src\CMakeFiles\pulseport-core.dir\core\metric_registry.cpp.obj
+FAILED: src/CMakeFiles/pulseport-core.dir/core/metric_registry.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fosrc\CMakeFiles\pulseport-core.dir\core\metric_registry.cpp.obj /Fdsrc\CMakeFiles\pulseport-core.dir\pulseport-core.pdb /FS -c D:\pulseport\src\core\metric_registry.cpp
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xmemory(734): error C2672: 'std::construct_at': no matching overloaded function found
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xutility(507): note: could be '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xmemory(734): note: the associated constraints are not satisfied
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xutility(505): note: 'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair': function does not take 2 arguments
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(477): note: could be 'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(_Tuple1 &,_Tuple2 &,std::integer_sequence<size_t,_Indices1...>,std::integer_sequence<size_t,_Indices2...>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(330): note: or       'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(std::piecewise_construct_t,std::tuple<_Types1...>,std::tuple<_Types2...>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(300): note: or       'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(std::pair<_Other1,_Other2> &&) noexcept(<expr>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(292): note: or       'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(const std::pair<_Other1,_Other2> &) noexcept(<expr>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(271): note: or       'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(_Other1 &&,_Other2 &&) noexcept(<expr>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(260): note: or       'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(_Ty1 &,const _Ty2 &) noexcept(<expr>)'
+        with
+        [
+            _Ty1=const std::string,
+            _Ty2=pulseport::MetricRegistry::Entry
+        ]
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\utility(253): note: or       'std::pair<const std::string,pulseport::MetricRegistry::Entry>::pair(void) noexcept(<expr>)'
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xutility(505): note: while trying to match the argument list '(const std::string, _Ty)'
+        with
+        [
+            _Ty=pulseport::MetricRegistry::Entry
+        ]
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xmemory(734): note: the template instantiation context (the oldest one first) is
+D:\pulseport\src\core\metric_registry.cpp(15): note: see reference to function template instantiation 'std::pair<std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,bool> std::_Hash<std::_Umap_traits<_Kty,pulseport::MetricRegistry::Entry,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>::emplace<const std::string&,pulseport::MetricRegistry::Entry>(const std::string &,pulseport::MetricRegistry::Entry &&)' being compiled
+        with
+        [
+            _Ty=std::pair<const std::string,pulseport::MetricRegistry::Entry>,
+            _Kty=std::string,
+            _Hasher=std::hash<std::string>,
+            _Keyeq=std::equal_to<std::string>,
+            _Alloc=std::allocator<std::pair<const std::string,pulseport::MetricRegistry::Entry>>
+        ]
+D:\pulseport\src\core\metric_registry.cpp(15): note: see the first reference to 'std::_Hash<std::_Umap_traits<_Kty,_Ty,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>::emplace' in 'pulseport::MetricRegistry::register_metric'
+        with
+        [
+            _Kty=std::string,
+            _Ty=pulseport::MetricRegistry::Entry,
+            _Hasher=std::hash<std::string>,
+            _Keyeq=std::equal_to<std::string>,
+            _Alloc=std::allocator<std::pair<const std::string,pulseport::MetricRegistry::Entry>>
+        ]
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\xhash(617): note: see reference to function template instantiation 'std::_List_node_emplace_op2<std::allocator<std::_List_node<std::pair<const std::string,pulseport::MetricRegistry::Entry>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<const std::string&,_Ty>(_Alnode &,const std::string &,_Ty &&)' being compiled
+        with
+        [
+            _Alloc=std::allocator<std::pair<const std::string,pulseport::MetricRegistry::Entry>>,
+            _Ty=pulseport::MetricRegistry::Entry,
+            _Alnode=std::allocator<std::_List_node<std::pair<const std::string,pulseport::MetricRegistry::Entry>,std::_Default_allocator_traits<std::allocator<std::pair<const std::string,pulseport::MetricRegistry::Entry>>>::void_pointer>>
+        ]
+E:\development\Visual Studio 2026\VC\Tools\MSVC\14.50.35717\include\list(595): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,const std::string&,pulseport::MetricRegistry::Entry>(_Alloc &,_Objty *const ,const std::string &,pulseport::MetricRegistry::Entry &&)' being compiled
+        with
+        [
+            _Alloc=std::allocator<std::_List_node<std::pair<const std::string,pulseport::MetricRegistry::Entry>,std::_Default_allocator_traits<std::allocator<std::pair<const std::string,pulseport::MetricRegistry::Entry>>>::void_pointer>>,
+            _Ty=std::pair<const std::string,pulseport::MetricRegistry::Entry>,
+            _Objty=std::pair<const std::string,pulseport::MetricRegistry::Entry>
+        ]
+[7/16] Building CXX object apps\pulseport-service\CMakeFiles\pulseport-service.dir\main.cpp.obj
+FAILED: apps/pulseport-service/CMakeFiles/pulseport-service.dir/main.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DBROTLI_SHARED_COMPILATION -DCPPHTTPLIB_BROTLI_SUPPORT -DCPPHTTPLIB_USE_NON_BLOCKING_GETADDRINFO -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Foapps\pulseport-service\CMakeFiles\pulseport-service.dir\main.cpp.obj /Fdapps\pulseport-service\CMakeFiles\pulseport-service.dir\ /FS -c D:\pulseport\apps\pulseport-service\main.cpp
+D:\pulseport\apps\pulseport-service\main.cpp(222): fatal error C1075: '{': no matching token found
+[8/16] Building CXX object src\CMakeFiles\pulseport-server.dir\server\http_server.cpp.obj
+FAILED: src/CMakeFiles/pulseport-server.dir/server/http_server.cpp.obj 
+E:\DEVELO~1\VISUAL~1\VC\Tools\MSVC\1450~1.357\bin\Hostx86\x86\cl.exe  /nologo /TP -DBROTLI_SHARED_COMPILATION -DCPPHTTPLIB_BROTLI_SUPPORT -DCPPHTTPLIB_USE_NON_BLOCKING_GETADDRINFO -DFMT_SHARED -DPULSEPORT_WEB_DIR=\"D:/pulseport/web/dist\" -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -D_WIN32_WINNT=0x0A00 -ID:\pulseport\include -external:ID:\pulseport\build\vcpkg_installed\x86-windows\include -external:W0 /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi /wd4251 /wd4275 /utf-8 /showIncludes /Fosrc\CMakeFiles\pulseport-server.dir\server\http_server.cpp.obj /Fdsrc\CMakeFiles\pulseport-server.dir\pulseport-server.pdb /FS -c D:\pulseport\src\server\http_server.cpp
+D:\pulseport\src\server\http_server.cpp(319): error C2001: newline in constant
+D:\pulseport\src\server\http_server.cpp(338): error C2059: syntax error: ')'
+D:\pulseport\src\server\http_server.cpp(340): error C3927: '->': trailing return type is not allowed after a non-function declarator
+D:\pulseport\src\server\http_server.cpp(340): error C3484: syntax error: expected '->' before the return type
+D:\pulseport\src\server\http_server.cpp(340): error C3613: missing return type after '->' ('int' assumed)
+D:\pulseport\src\server\http_server.cpp(340): error C3646: 'Get': unknown override specifier
+D:\pulseport\src\server\http_server.cpp(340): error C2059: syntax error: '('
+D:\pulseport\src\server\http_server.cpp(340): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+D:\pulseport\src\server\http_server.cpp(371): error C2059: syntax error: ')'
+D:\pulseport\src\server\http_server.cpp(371): error C2238: unexpected token(s) preceding ';'
+D:\pulseport\src\server\http_server.cpp(373): error C3927: '->': trailing return type is not allowed after a non-function declarator
+D:\pulseport\src\server\http_server.cpp(373): error C3484: syntax error: expected '->' before the return type
+D:\pulseport\src\server\http_server.cpp(373): error C3613: missing return type after '->' ('int' assumed)
+D:\pulseport\src\server\http_server.cpp(373): error C3646: 'Post': unknown override specifier
+D:\pulseport\src\server\http_server.cpp(373): error C2059: syntax error: '('
+D:\pulseport\src\server\http_server.cpp(373): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+D:\pulseport\src\server\http_server.cpp(412): error C2059: syntax error: ')'
+D:\pulseport\src\server\http_server.cpp(412): error C2238: unexpected token(s) preceding ';'
+D:\pulseport\src\server\http_server.cpp(414): error C3927: '->': trailing return type is not allowed after a non-function declarator
+D:\pulseport\src\server\http_server.cpp(414): error C3484: syntax error: expected '->' before the return type
+D:\pulseport\src\server\http_server.cpp(414): error C3613: missing return type after '->' ('int' assumed)
+D:\pulseport\src\server\http_server.cpp(414): error C3646: 'Get': unknown override specifier
+D:\pulseport\src\server\http_server.cpp(414): error C2059: syntax error: '('
+D:\pulseport\src\server\http_server.cpp(414): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+D:\pulseport\src\server\http_server.cpp(433): error C2059: syntax error: ')'
+D:\pulseport\src\server\http_server.cpp(433): error C2238: unexpected token(s) preceding ';'
+D:\pulseport\src\server\http_server.cpp(435): error C3927: '->': trailing return type is not allowed after a non-function declarator
+D:\pulseport\src\server\http_server.cpp(435): error C3484: syntax error: expected '->' before the return type
+D:\pulseport\src\server\http_server.cpp(435): error C3613: missing return type after '->' ('int' assumed)
+D:\pulseport\src\server\http_server.cpp(435): error C3646: 'Post': unknown override specifier
+D:\pulseport\src\server\http_server.cpp(435): error C2059: syntax error: '('
+D:\pulseport\src\server\http_server.cpp(435): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+D:\pulseport\src\server\http_server.cpp(492): error C2059: syntax error: ')'
+D:\pulseport\src\server\http_server.cpp(492): error C2238: unexpected token(s) preceding ';'
+D:\pulseport\src\server\http_server.cpp(494): error C3927: '->': trailing return type is not allowed after a non-function declarator
+D:\pulseport\src\server\http_server.cpp(494): error C3484: syntax error: expected '->' before the return type
+D:\pulseport\src\server\http_server.cpp(494): error C3613: missing return type after '->' ('int' assumed)
+D:\pulseport\src\server\http_server.cpp(494): error C3646: 'Get': unknown override specifier
+D:\pulseport\src\server\http_server.cpp(494): error C2059: syntax error: '('
+D:\pulseport\src\server\http_server.cpp(494): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+D:\pulseport\src\server\http_server.cpp(503): error C2059: syntax error: ')'
+D:\pulseport\src\server\http_server.cpp(503): error C2238: unexpected token(s) preceding ';'
+D:\pulseport\src\server\http_server.cpp(506): error C2628: 'pulseport::HttpServer::Impl' followed by 'void' is illegal (did you forget a ';'?)
+D:\pulseport\src\server\http_server.cpp(507): error C2065: 'web_dir': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(508): error C2065: 'svr': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(508): error C2065: 'web_dir': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(509): error C2065: 'web_dir': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(319): error C2760: syntax error: '}' was unexpected here; expected ')'
+D:\pulseport\src\server\http_server.cpp(319): error C2760: syntax error: ')' was unexpected here; expected ';'
+D:\pulseport\src\server\http_server.cpp(319): error C3878: syntax error: unexpected token ')' following 'expression-statement'
+D:\pulseport\src\server\http_server.cpp(319): error C3878: syntax error: unexpected token ')' following 'statement'
+D:\pulseport\src\server\http_server.cpp(319): error C3878: syntax error: unexpected token ')' following 'statement-seq'
+D:\pulseport\src\server\http_server.cpp(319): note: missing one of:  '}' ?
+D:\pulseport\src\server\http_server.cpp(319): error C2760: syntax error: ')' was unexpected here; expected '}'
+D:\pulseport\src\server\http_server.cpp(319): error C3878: syntax error: unexpected token ')' following 'compound-statement'
+D:\pulseport\src\server\http_server.cpp(319): error C3878: syntax error: unexpected token ')' following 'selection-statement'
+D:\pulseport\src\server\http_server.cpp(320): error C2760: syntax error: ')' was unexpected here; expected ';'
+D:\pulseport\src\server\http_server.cpp(320): error C3878: syntax error: unexpected token ')' following 'expression-statement'
+D:\pulseport\src\server\http_server.cpp(324): error C2062: type 'auto' unexpected
+D:\pulseport\src\server\http_server.cpp(326): error C2065: 'data': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(326): error C2530: 'd': references must be initialized
+D:\pulseport\src\server\http_server.cpp(326): error C3531: 'd': a symbol whose type contains 'auto' must have an initializer
+D:\pulseport\src\server\http_server.cpp(326): error C2143: syntax error: missing ';' before ':'
+D:\pulseport\src\server\http_server.cpp(326): error C2143: syntax error: missing ';' before ')'
+D:\pulseport\src\server\http_server.cpp(337): error C2065: 'res': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(516): error C2653: 'HttpServer': is not a class or namespace name
+D:\pulseport\src\server\http_server.cpp(516): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\pulseport\src\server\http_server.cpp(516): error C2065: 'MetricRegistry': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(516): error C2065: 'registry': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(517): error C2065: 'StorageReader': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(517): error C2065: 'reader': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(518): error C2065: 'StorageWriter': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(518): error C2065: 'writer': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(519): error C2065: 'Database': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(519): error C2065: 'database': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(520): error C2059: syntax error: ':'
+D:\pulseport\src\server\http_server.cpp(520): error C2065: 'Impl': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(520): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\pulseport\src\server\http_server.cpp(520): error C2065: 'registry': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(520): error C2065: 'reader': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(520): error C2065: 'writer': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(520): error C2065: 'database': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(520): error C2059: syntax error: '{'
+D:\pulseport\src\server\http_server.cpp(520): error C2143: syntax error: missing ';' before '{'
+D:\pulseport\src\server\http_server.cpp(520): error C2447: '{': missing function header (old-style formal list?)
+D:\pulseport\src\server\http_server.cpp(522): error C2825: 'HttpServer': must be a class or namespace when followed by '::'
+D:\pulseport\src\server\http_server.cpp(522): error C2510: 'HttpServer': left of '::' must be a class/struct/union
+D:\pulseport\src\server\http_server.cpp(522): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\pulseport\src\server\http_server.cpp(523): error C3861: 'stop': identifier not found
+D:\pulseport\src\server\http_server.cpp(524): warning C4508: '{dtor}': function should return a value; 'void' return type assumed
+D:\pulseport\src\server\http_server.cpp(526): error C2825: 'HttpServer': must be a class or namespace when followed by '::'
+D:\pulseport\src\server\http_server.cpp(526): error C2510: 'HttpServer': left of '::' must be a class/struct/union
+D:\pulseport\src\server\http_server.cpp(530): error C2825: 'HttpServer': must be a class or namespace when followed by '::'
+D:\pulseport\src\server\http_server.cpp(530): error C2510: 'HttpServer': left of '::' must be a class/struct/union
+D:\pulseport\src\server\http_server.cpp(530): error C2182: 'set_power_pipeline': this use of 'void' is not valid
+D:\pulseport\src\server\http_server.cpp(530): error C2065: 'PowerPipeline': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(530): error C2065: 'pipeline': undeclared identifier
+D:\pulseport\src\server\http_server.cpp(530): error C2143: syntax error: missing ';' before '{'
+D:\pulseport\src\server\http_server.cpp(531): error C3927: '->': trailing return type is not allowed after a non-function declarator
+D:\pulseport\src\server\http_server.cpp(531): error C3613: missing return type after '->' ('int' assumed)
+D:\pulseport\src\server\http_server.cpp(531): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\pulseport\src\server\http_server.cpp(531): error C2086: 'int impl_': redefinition
+D:\pulseport\src\server\http_server.cpp(520): note: see declaration of 'impl_'
+D:\pulseport\src\server\http_server.cpp(531): error C2146: syntax error: missing ';' before identifier 'power_pipeline'
+D:\pulseport\src\server\http_server.cpp(531): fatal error C1003: error count exceeds 100; stopping compilation
+ninja: build stopped: subcommand failed.
