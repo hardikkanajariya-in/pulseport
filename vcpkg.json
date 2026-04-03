@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": [
     "cpp-httplib",
+    "fmt",
     "sqlite3",
     "spdlog",
     "nlohmann-json"

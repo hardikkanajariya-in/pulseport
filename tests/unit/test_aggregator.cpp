@@ -16,8 +16,8 @@ protected:
         writer_ = std::make_unique<StorageWriter>(db_.handle());
         reader_ = std::make_unique<StorageReader>(db_.handle());
 
-        registry_.define("cpu.total_pct", "CPU Total", "%", "cpu");
-        registry_.define("power.current_w", "Power", "W", "power");
+        registry_.register_metric({"cpu.total_pct", "CPU Total", "%", "pdh", "cpu"});
+        registry_.register_metric({"power.current_w", "Power", "W", "battery_rate", "power"});
     }
 
     void TearDown() override {

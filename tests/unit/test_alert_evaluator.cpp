@@ -33,15 +33,14 @@ protected:
 
 TEST_F(AlertEvaluatorTest, NoAlertBelowThreshold) {
     MetricRegistry registry;
-    registry.define("cpu.total_pct", "CPU Total", "%", "cpu");
+    registry.register_metric({"cpu.total_pct", "CPU Total", "%", "pdh", "cpu"});
 
     AlertEvaluator::Thresholds thresholds;
     thresholds.cpu_high_pct = 90.0;
     thresholds.cpu_sustained_min = 3;
     AlertEvaluator evaluator(*writer_, thresholds);
 
-    // Set CPU to 50% (below threshold)
-    registry.update("cpu.total_pct", 50.0, Quality::Measured);
+    registry.push_sample({"cpu.total_pct", 50.0, "%", Quality::Measured, now_unix()});
     evaluator.evaluate(registry);
 
     // No events should be written
@@ -51,16 +50,15 @@ TEST_F(AlertEvaluatorTest, NoAlertBelowThreshold) {
 
 TEST_F(AlertEvaluatorTest, AlertAfterSustainedViolation) {
     MetricRegistry registry;
-    registry.define("cpu.total_pct", "CPU Total", "%", "cpu");
+    registry.register_metric({"cpu.total_pct", "CPU Total", "%", "pdh", "cpu"});
 
     AlertEvaluator::Thresholds thresholds;
     thresholds.cpu_high_pct = 90.0;
     thresholds.cpu_sustained_min = 2;
-    thresholds.cooldown_minutes = 0; // No cooldown for test
+    thresholds.cooldown_minutes = 0;
     AlertEvaluator evaluator(*writer_, thresholds);
 
-    // Set CPU to 95% and evaluate 3 times (simulating 3 minutes > 2 sustained)
-    registry.update("cpu.total_pct", 95.0, Quality::Measured);
+    registry.push_sample({"cpu.total_pct", 95.0, "%", Quality::Measured, now_unix()});
 
     evaluator.evaluate(registry);
     evaluator.evaluate(registry);
@@ -79,9 +77,8 @@ TEST_F(AlertEvaluatorTest, ThresholdCanBeUpdated) {
     t2.cpu_high_pct = 50.0;
     evaluator.set_thresholds(t2);
 
-    // Verify no crash on threshold update
     MetricRegistry registry;
-    registry.define("cpu.total_pct", "CPU Total", "%", "cpu");
-    registry.update("cpu.total_pct", 60.0, Quality::Measured);
+    registry.register_metric({"cpu.total_pct", "CPU Total", "%", "pdh", "cpu"});
+    registry.push_sample({"cpu.total_pct", 60.0, "%", Quality::Measured, now_unix()});
     evaluator.evaluate(registry);
 }

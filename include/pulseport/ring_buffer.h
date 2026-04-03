@@ -4,6 +4,7 @@
 #include <atomic>
 #include <cstddef>
 #include <optional>
+#include <vector>
 
 namespace pulseport {
 
@@ -55,6 +56,19 @@ public:
             out[i] = buffer_[(start + i) & kMask];
         }
         return count;
+    }
+
+    std::optional<T> latest() const {
+        size_t w = write_pos_.load(std::memory_order_acquire);
+        if (w == 0) return std::nullopt;
+        return buffer_[(w - 1) & kMask];
+    }
+
+    std::vector<T> recent(size_t count) const {
+        std::vector<T> result(count);
+        size_t actual = peek_last(result.data(), count);
+        result.resize(actual);
+        return result;
     }
 
     static constexpr size_t capacity() { return Capacity; }

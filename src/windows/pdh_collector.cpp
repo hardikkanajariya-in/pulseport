@@ -9,6 +9,8 @@
 #pragma comment(lib, "pdh.lib")
 #endif
 
+#include <cstring>
+
 namespace pulseport {
 
 #ifdef _WIN32
@@ -60,8 +62,9 @@ void register_pdh_collectors(MetricRegistry& registry) {
     auto add_counter = [](const wchar_t* path, PDH_HCOUNTER* counter) {
         PDH_STATUS s = PdhAddEnglishCounterW(s_query, path, 0, counter);
         if (s != ERROR_SUCCESS) {
-            spdlog::warn("PdhAddCounter failed for {}: 0x{:08X}",
-                         std::string(path, path + wcslen(path)), s);
+            char narrow[256]{};
+            WideCharToMultiByte(CP_ACP, 0, path, -1, narrow, sizeof(narrow), nullptr, nullptr);
+            spdlog::warn("PdhAddCounter failed for {}: 0x{:08X}", narrow, s);
         }
     };
 

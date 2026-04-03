@@ -62,7 +62,7 @@ TEST_F(SqliteWritePerf, AggregateWriteThroughput) {
         agg.avg_value = 50.0;
         agg.sample_count = 60;
         agg.quality = Quality::Measured;
-        writer_->write_aggregate_1m(agg);
+        writer_->write_1m(std::vector{agg});
     }
 
     auto end = std::chrono::high_resolution_clock::now();

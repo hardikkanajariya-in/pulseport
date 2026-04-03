@@ -55,6 +55,7 @@ target_link_libraries(pulseport-metrics PUBLIC
     pulseport-core
     pulseport-storage
     spdlog::spdlog
+    fmt::fmt
 )
 
 # Windows collectors
