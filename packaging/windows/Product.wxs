@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <Package
+    Name="PulsePort"
+    Manufacturer="PulsePort Project"
+    Version="$(var.ProductVersion)"
+    UpgradeCode="7B2E0F1A-3C4D-4E5F-A6B7-8C9D0E1F2A3B"
+    Language="1033"
+    InstallerVersion="500"
+    Compressed="yes"
+    Scope="perMachine">
+
+    <MajorUpgrade
+      DowngradeErrorMessage="A newer version of PulsePort is already installed."
+      AllowSameVersionUpgrades="yes" />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- ── Features ── -->
+    <Feature Id="MainFeature" Title="PulsePort Service" Level="1">
+      <ComponentGroupRef Id="ServiceComponents" />
+      <ComponentGroupRef Id="WebComponents" />
+      <ComponentRef Id="ConfigComponent" />
+      <ComponentRef Id="MigrationComponent" />
+    </Feature>
+
+    <!-- ── Directory Structure ── -->
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="PulsePort">
+        <Directory Id="WebDir" Name="web" />
+        <Directory Id="DbDir" Name="db">
+          <Directory Id="MigrationsDir" Name="migrations" />
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <!-- ── Service Binary ── -->
+    <ComponentGroup Id="ServiceComponents" Directory="INSTALLFOLDER">
+      <Component Id="ServiceExe" Guid="1A2B3C4D-5E6F-7A8B-9C0D-1E2F3A4B5C6D">
+        <File Id="PulsePortExe" Source="$(var.BuildDir)\pulseport-service.exe" KeyPath="yes" />
+
+        <ServiceInstall
+          Id="PulsePortService"
+          Name="PulsePort"
+          DisplayName="PulsePort System Monitor"
+          Description="Real-time Windows system telemetry with local web dashboard."
+          Type="ownProcess"
+          Start="auto"
+          ErrorControl="normal"
+          Account="LocalSystem"
+          Arguments="--service" />
+
+        <ServiceControl
+          Id="StartPulsePort"
+          Name="PulsePort"
+          Start="install"
+          Stop="both"
+          Remove="uninstall"
+          Wait="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- ── Web Dashboard (static files) ── -->
+    <ComponentGroup Id="WebComponents" Directory="WebDir">
+      <Files Include="$(var.WebDistDir)\**" />
+    </ComponentGroup>
+
+    <!-- ── Default Configuration ── -->
+    <Component Id="ConfigComponent" Directory="INSTALLFOLDER" Guid="2B3C4D5E-6F7A-8B9C-0D1E-2F3A4B5C6D7E">
+      <File Id="DefaultConfig" Source="$(var.SourceDir)\config.default.json" Name="config.json" KeyPath="yes" />
+      <!-- NeverOverwrite preserves user edits on upgrade -->
+      <RemoveFile Id="RemoveConfig" Name="config.json" On="uninstall" />
+    </Component>
+
+    <!-- ── Database Migrations ── -->
+    <Component Id="MigrationComponent" Directory="MigrationsDir" Guid="3C4D5E6F-7A8B-9C0D-1E2F-3A4B5C6D7E8F">
+      <File Id="Migration001" Source="$(var.SourceDir)\db\migrations\001_initial.sql" KeyPath="yes" />
+    </Component>
+
+  </Package>
+</Wix>

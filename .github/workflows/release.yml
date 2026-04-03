@@ -1,0 +1,123 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: windows-latest
+    env:
+      VCPKG_DEFAULT_TRIPLET: x64-windows
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version
+        id: version
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $ver = $tag -replace '^v', ''
+          echo "VERSION=$ver" >> $env:GITHUB_OUTPUT
+          echo "TAG=$tag" >> $env:GITHUB_OUTPUT
+
+      # --- Frontend ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "web/package-lock.json"
+
+      - name: Build frontend
+        working-directory: web
+        run: |
+          npm ci
+          npm run build
+
+      # --- Backend ---
+      - name: Restore vcpkg cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            C:\vcpkg\installed
+            C:\vcpkg\packages
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
+
+      - name: Install vcpkg dependencies
+        run: vcpkg install --triplet x64-windows
+        env:
+          VCPKG_MANIFEST_DIR: ${{ github.workspace }}
+
+      - name: Configure CMake
+        run: >
+          cmake -B build
+          -DCMAKE_BUILD_TYPE=Release
+          -DCMAKE_TOOLCHAIN_FILE="C:\vcpkg\scripts\buildsystems\vcpkg.cmake"
+          -DVCPKG_TARGET_TRIPLET=x64-windows
+          -DPULSEPORT_VERSION=${{ steps.version.outputs.VERSION }}
+          -DFRONTEND_BUILD_DIR="${{ github.workspace }}\web\dist"
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Run tests
+        run: ctest --test-dir build --config Release --output-on-failure
+
+      # --- Installer ---
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0"
+
+      - name: Install WiX v4
+        run: dotnet tool install --global wix
+
+      - name: Prepare installer staging
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path installer\bin
+          New-Item -ItemType Directory -Force -Path installer\bin\web
+          New-Item -ItemType Directory -Force -Path installer\bin\db\migrations
+          Copy-Item build\Release\pulseport-service.exe installer\bin\
+          Copy-Item -Recurse web\dist\* installer\bin\web\
+          Copy-Item -Recurse db\migrations\* installer\bin\db\migrations\
+
+      - name: Build MSI
+        run: >
+          wix build
+          packaging\windows\Product.wxs
+          packaging\windows\Service.wxs
+          -arch x64
+          -d Version=${{ steps.version.outputs.VERSION }}
+          -d BinDir=${{ github.workspace }}\installer\bin
+          -o PulsePort-${{ steps.version.outputs.TAG }}-x64.msi
+
+      - name: Generate checksum
+        shell: pwsh
+        run: |
+          $file = "PulsePort-${{ steps.version.outputs.TAG }}-x64.msi"
+          $hash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+          "$hash  $file" | Out-File -Encoding ascii "${file}.sha256"
+
+      # --- Release ---
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            PulsePort-${{ steps.version.outputs.TAG }}-x64.msi
+            PulsePort-${{ steps.version.outputs.TAG }}-x64.msi.sha256
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

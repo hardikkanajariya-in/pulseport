@@ -1,0 +1,15 @@
+{
+  "http_port": 9770,
+  "bind_address": "127.0.0.1",
+  "sample_interval_sec": 1,
+  "retention_1m_days": 90,
+  "retention_15m_days": 365,
+  "retention_event_days": 365,
+  "log_level": "info",
+  "log_max_size_mb": 10,
+  "log_max_files": 5,
+  "db_path": "",
+  "process_collector_enabled": true,
+  "process_top_n": 10,
+  "process_interval_sec": 5
+}

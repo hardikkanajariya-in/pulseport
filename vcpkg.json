@@ -1,0 +1,11 @@
+{
+  "name": "pulseport",
+  "version": "0.1.0",
+  "description": "Local observability service for Windows",
+  "dependencies": [
+    "cpp-httplib",
+    "sqlite3",
+    "spdlog",
+    "nlohmann-json"
+  ]
+}

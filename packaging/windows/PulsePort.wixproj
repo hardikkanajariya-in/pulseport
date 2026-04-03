@@ -1,0 +1,12 @@
+<Project Sdk="WixToolset.Sdk/4.0.0">
+  <PropertyGroup>
+    <OutputType>Package</OutputType>
+    <ProductVersion Condition="'$(ProductVersion)' == ''">0.1.0</ProductVersion>
+    <DefineConstants>
+      ProductVersion=$(ProductVersion);
+      BuildDir=$(BuildDir);
+      WebDistDir=$(WebDistDir);
+      SourceDir=$(SourceDir)
+    </DefineConstants>
+  </PropertyGroup>
+</Project>
