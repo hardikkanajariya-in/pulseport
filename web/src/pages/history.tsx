@@ -1,5 +1,6 @@
-import { useState } from 'preact/hooks';
+import { useState, useMemo } from 'preact/hooks';
 import { useApi, apiPost } from '../hooks/use-api';
+import { Chart } from '../components/chart';
 
 export function History() {
   const [metric, setMetric] = useState('cpu.total_pct');
@@ -19,6 +20,32 @@ export function History() {
     start: String(now - range),
     end: String(now),
   });
+
+  // Fetch events for overlay
+  const { data: events } = useApi<Array<{
+    ts: number;
+    title: string;
+    severity: string;
+  }>>('/events', {
+    start: String(now - range),
+    end: String(now),
+  });
+
+  // Build chart data from history
+  const chartData = useMemo(() => {
+    if (!data || data.length === 0) return null;
+    const timestamps = data.map(d => d.bucket_ts);
+    const avgValues = data.map(d => d.avg);
+    return [timestamps, avgValues] as [number[], number[]];
+  }, [data]);
+
+  const eventMarkers = useMemo(() => {
+    return events?.map(e => ({
+      ts: e.ts,
+      title: e.title,
+      severity: e.severity,
+    })) ?? [];
+  }, [events]);
 
   const handleExport = () => {
     if (!data || data.length === 0) return;
@@ -92,6 +119,26 @@ export function History() {
         <button class="btn" onClick={handleExport}>Export CSV</button>
         <button class="btn btn-danger" onClick={handleDelete}>Delete Range</button>
       </div>
+
+      {/* Chart visualization with event overlay */}
+      {chartData && chartData[0].length > 0 && (
+        <div style="margin-bottom: 16px;">
+          <Chart
+            title={metric}
+            data={chartData}
+            series={[
+              {
+                label: 'Avg',
+                stroke: '#6366f1',
+                width: 1.5,
+                fill: 'rgba(99, 102, 241, 0.1)',
+              },
+            ]}
+            height={240}
+            events={eventMarkers}
+          />
+        </div>
+      )}
 
       <div class="card">
         {loading ? (

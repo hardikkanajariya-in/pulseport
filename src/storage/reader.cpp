@@ -196,4 +196,80 @@ int StorageReader::delete_all_history() {
     return total;
 }
 
+int StorageReader::cleanup_expired(const RetentionConfig& rc) {
+    int64_t now = now_unix();
+    int total_deleted = 0;
+
+    auto purge_table = [&](const char* table, const char* ts_col, int days) {
+        if (days <= 0) return;
+        int64_t cutoff = now - static_cast<int64_t>(days) * 86400;
+        std::string sql = std::string("DELETE FROM ") + table +
+                          " WHERE " + ts_col + " < ?";
+        sqlite3_stmt* stmt = nullptr;
+        if (sqlite3_prepare_v2(db_, sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
+            sqlite3_bind_int64(stmt, 1, cutoff);
+            sqlite3_step(stmt);
+            sqlite3_finalize(stmt);
+            int deleted = sqlite3_changes(db_);
+            if (deleted > 0) {
+                spdlog::info("Retention cleanup: {} rows from {}", deleted, table);
+                total_deleted += deleted;
+            }
+        }
+    };
+
+    sqlite3_exec(db_, "BEGIN TRANSACTION", nullptr, nullptr, nullptr);
+
+    purge_table("metric_1m",    "bucket_ts", rc.retention_1m_days);
+    purge_table("metric_15m",   "bucket_ts", rc.retention_15m_days);
+    purge_table("events",       "event_ts",  rc.retention_events_days);
+
+    // energy_daily uses ISO date string, compare differently
+    if (rc.retention_daily_days > 0) {
+        int64_t cutoff_ts = now - static_cast<int64_t>(rc.retention_daily_days) * 86400;
+        // Convert cutoff to ISO date string
+        time_t t = static_cast<time_t>(cutoff_ts);
+        struct tm tm_buf{};
+        localtime_s(&tm_buf, &t);
+        char date_str[11];
+        strftime(date_str, sizeof(date_str), "%Y-%m-%d", &tm_buf);
+
+        const char* sql = "DELETE FROM energy_daily WHERE day_local < ?";
+        sqlite3_stmt* stmt = nullptr;
+        if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) == SQLITE_OK) {
+            sqlite3_bind_text(stmt, 1, date_str, -1, SQLITE_TRANSIENT);
+            sqlite3_step(stmt);
+            sqlite3_finalize(stmt);
+            int deleted = sqlite3_changes(db_);
+            if (deleted > 0) {
+                spdlog::info("Retention cleanup: {} rows from energy_daily", deleted);
+                total_deleted += deleted;
+            }
+        }
+    }
+
+    // Audit trail
+    if (total_deleted > 0) {
+        const char* audit_sql = R"(
+            INSERT INTO deletions_audit (scope, note)
+            VALUES ('retention_cleanup', ?)
+        )";
+        sqlite3_stmt* audit = nullptr;
+        if (sqlite3_prepare_v2(db_, audit_sql, -1, &audit, nullptr) == SQLITE_OK) {
+            std::string note = "Automated retention cleanup: " +
+                               std::to_string(total_deleted) + " total rows";
+            sqlite3_bind_text(audit, 1, note.c_str(), -1, SQLITE_TRANSIENT);
+            sqlite3_step(audit);
+            sqlite3_finalize(audit);
+        }
+    }
+
+    sqlite3_exec(db_, "COMMIT", nullptr, nullptr, nullptr);
+
+    if (total_deleted > 0) {
+        spdlog::info("Retention cleanup complete: {} total rows deleted", total_deleted);
+    }
+    return total_deleted;
+}
+
 } // namespace pulseport

@@ -3,6 +3,8 @@
 #include "pulseport/metric_registry.h"
 #include "pulseport/database.h"
 #include "pulseport/storage.h"
+#include "pulseport/config.h"
+#include "pulseport/power_pipeline.h"
 
 #include <atomic>
 #include <memory>
@@ -35,6 +37,16 @@ public:
 
     /// Broadcast a delta message to all connected WebSocket clients.
     void broadcast_delta(const std::vector<MetricSample>& samples);
+
+    /// Broadcast an event notification to all connected WebSocket clients.
+    void broadcast_event(const std::string& severity, const std::string& category,
+                         const std::string& title);
+
+    /// Set the PowerPipeline reference for rolling averages.
+    void set_power_pipeline(PowerPipeline* pipeline);
+
+    /// Set mutable config reference for config POST endpoint.
+    void set_config(Config* cfg, const std::string& config_path);
 
 private:
     struct Impl;

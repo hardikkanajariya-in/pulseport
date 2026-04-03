@@ -45,10 +45,11 @@ add_library(pulseport-diagnostics STATIC
 )
 target_link_libraries(pulseport-diagnostics PUBLIC spdlog::spdlog)
 
-# Metrics (aggregator, power pipeline)
+# Metrics (aggregator, power pipeline, alert evaluator)
 add_library(pulseport-metrics STATIC
     metrics/aggregator.cpp
     metrics/power_pipeline.cpp
+    metrics/alert_evaluator.cpp
 )
 target_link_libraries(pulseport-metrics PUBLIC
     pulseport-core

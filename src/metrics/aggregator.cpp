@@ -129,9 +129,53 @@ void Aggregator::flush_15m(StorageReader& reader) {
     }
 }
 
-void Aggregator::finalize_daily(const std::string& /*day_local*/) {
-    // Placeholder — will compute daily energy totals from 15m data
-    spdlog::info("Daily finalization placeholder");
+void Aggregator::finalize_daily(const std::string& day_local, StorageReader& reader) {
+    // Parse day_local "YYYY-MM-DD" to get Unix timestamp range
+    struct tm tm_buf{};
+    int y, mo, d;
+    if (sscanf(day_local.c_str(), "%d-%d-%d", &y, &mo, &d) != 3) {
+        spdlog::warn("finalize_daily: invalid day format '{}'", day_local);
+        return;
+    }
+    tm_buf.tm_year = y - 1900;
+    tm_buf.tm_mon = mo - 1;
+    tm_buf.tm_mday = d;
+    tm_buf.tm_isdst = -1;
+    time_t day_start = mktime(&tm_buf);
+    if (day_start == -1) return;
+
+    int64_t start_ts = static_cast<int64_t>(day_start);
+    int64_t end_ts = start_ts + 86400;
+
+    // Query 1m power data for the day
+    auto power_data = reader.query_history("metric_1m", "power.current_w",
+                                            start_ts, end_ts);
+
+    double total_wh = 0.0;
+    double peak_w = 0.0;
+    double sum_w = 0.0;
+    int active_seconds = 0;
+    Quality worst = Quality::Measured;
+
+    for (const auto& agg : power_data) {
+        // Each 1m aggregate: avg_value is avg watts over that minute
+        double watts = agg.avg_value;
+        total_wh += watts * (60.0 / 3600.0); // 1 minute of energy in Wh
+        peak_w = std::max(peak_w, agg.max_value);
+        sum_w += watts * agg.sample_count;
+        active_seconds += 60;
+        if (static_cast<uint8_t>(agg.quality) > static_cast<uint8_t>(worst)) {
+            worst = agg.quality;
+        }
+    }
+
+    double avg_w = power_data.empty() ? 0.0 : (sum_w / std::max(1, active_seconds));
+
+    writer_.write_energy_daily(day_local, total_wh, avg_w, peak_w,
+                                0.0, 0.0, active_seconds, worst, true);
+
+    spdlog::info("Daily energy finalized for {}: {:.1f} Wh, avg {:.1f} W, peak {:.1f} W",
+                  day_local, total_wh, avg_w, peak_w);
 }
 
 } // namespace pulseport

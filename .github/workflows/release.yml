@@ -101,7 +101,6 @@ jobs:
         run: >
           wix build
           packaging\windows\Product.wxs
-          packaging\windows\Service.wxs
           -arch x64
           -d Version=${{ steps.version.outputs.VERSION }}
           -d BinDir=${{ github.workspace }}\installer\bin

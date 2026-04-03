@@ -27,7 +27,7 @@ public:
     void flush_15m(StorageReader& reader);
 
     /// Called at day boundary or shutdown: finalize daily energy.
-    void finalize_daily(const std::string& day_local);
+    void finalize_daily(const std::string& day_local, StorageReader& reader);
 
     /// Get the current working bucket timestamp (floor to minute).
     static int64_t bucket_1m(int64_t ts);

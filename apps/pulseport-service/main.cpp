@@ -9,6 +9,8 @@
 #include "pulseport/service_control.h"
 #include "pulseport/storage.h"
 #include "pulseport/version.h"
+#include "pulseport/power_pipeline.h"
+#include "pulseport/alert_evaluator.h"
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
@@ -18,6 +20,7 @@
 #include <spdlog/sinks/win_eventlog_sink.h>
 #endif
 
+#include <ctime>
 #include <filesystem>
 #include <iostream>
 #include <string>
@@ -75,6 +78,9 @@ static void run_application(const pulseport::Config& cfg) {
     sm.version = PULSEPORT_VERSION;
     sm.start_time_unix = now_unix();
 
+    // Mutable config copy for runtime updates
+    Config runtime_cfg = cfg;
+
     // Open database
     Database database;
     if (!database.open(cfg.db_path, cfg.migrations_dir)) {
@@ -100,8 +106,33 @@ static void run_application(const pulseport::Config& cfg) {
         writer.write_metric_info(info);
     }
 
+    // Power pipeline for energy accumulation
+    PowerPipeline power_pipeline;
+
+    // Alert evaluator
+    AlertEvaluator::Thresholds alert_thresholds{};
+    alert_thresholds.cpu_high_pct      = runtime_cfg.alert_cpu_high_pct;
+    alert_thresholds.cpu_sustained_min = runtime_cfg.alert_cpu_sustained_min;
+    alert_thresholds.mem_high_pct      = runtime_cfg.alert_mem_high_pct;
+    alert_thresholds.mem_sustained_min = runtime_cfg.alert_mem_sustained_min;
+    alert_thresholds.battery_low_pct   = runtime_cfg.alert_battery_low_pct;
+    alert_thresholds.power_high_w      = runtime_cfg.alert_power_high_w;
+    alert_thresholds.cooldown_minutes  = runtime_cfg.alert_cooldown_minutes;
+    AlertEvaluator alert_evaluator(writer, alert_thresholds);
+
     // Aggregator
     Aggregator aggregator(registry, writer);
+
+    // Track last known day for daily finalization
+    auto get_today_str = []() -> std::string {
+        time_t t = time(nullptr);
+        struct tm tm_buf{};
+        localtime_s(&tm_buf, &t);
+        char buf[11];
+        strftime(buf, sizeof(buf), "%Y-%m-%d", &tm_buf);
+        return buf;
+    };
+    std::string last_day = get_today_str();
 
     // Sampler
     Sampler sampler(registry);
@@ -111,7 +142,17 @@ static void run_application(const pulseport::Config& cfg) {
         [](MetricRegistry& r) { collect_pdh(r); });
 
     sampler.add_collector("battery", cfg.sample_interval_ms,
-        [](MetricRegistry& r) { collect_battery(r); });
+        [&power_pipeline](MetricRegistry& r) {
+            collect_battery(r);
+            // Feed power pipeline with latest power reading
+            auto snap = r.snapshot();
+            for (const auto& s : snap) {
+                if (s.key == "power.current_w") {
+                    power_pipeline.update(s.value, s.quality, s.ts);
+                    break;
+                }
+            }
+        });
 
     sampler.add_collector("thermal", cfg.thermal_interval_ms,
         [](MetricRegistry& r) { collect_thermal(r); });
@@ -121,7 +162,41 @@ static void run_application(const pulseport::Config& cfg) {
 
     // Aggregation callback (runs every 60s via sampler)
     sampler.add_collector("aggregator_flush", cfg.aggregation_interval_s * 1000,
-        [&aggregator](MetricRegistry&) { aggregator.flush_1m(); });
+        [&aggregator, &alert_evaluator, &reader, &get_today_str,
+         &last_day, &power_pipeline](MetricRegistry& r) {
+            aggregator.flush_1m();
+            self_metrics().last_flush_time = now_unix();
+
+            // Daily finalization check
+            std::string today = get_today_str();
+            if (today != last_day) {
+                spdlog::info("Day boundary crossed: {} → {}", last_day, today);
+                aggregator.finalize_daily(last_day, reader);
+                power_pipeline.reset_daily();
+                last_day = today;
+            }
+
+            // Evaluate alert thresholds
+            alert_evaluator.evaluate(r);
+        });
+
+    // Maintenance callback (runs every hour)
+    sampler.add_collector("maintenance", 3600 * 1000,
+        [&reader, &runtime_cfg, &database](MetricRegistry&) {
+            StorageReader::RetentionConfig rc;
+            rc.retention_1m_days     = runtime_cfg.retention_1m_days;
+            rc.retention_15m_days    = runtime_cfg.retention_15m_days;
+            rc.retention_daily_days  = runtime_cfg.retention_daily_days;
+            rc.retention_events_days = runtime_cfg.retention_events_days;
+            reader.cleanup_expired(rc);
+
+            // WAL checkpoint
+            database.checkpoint();
+
+            // Update DB size metrics
+            self_metrics().db_size_bytes = database.file_size_bytes();
+            self_metrics().wal_size_bytes = database.wal_size_bytes();
+        });
 
     // Log service start event
     writer.write_event(now_unix(), "info", "lifecycle", "PulsePort service started");
@@ -132,6 +207,22 @@ static void run_application(const pulseport::Config& cfg) {
     // HTTP server (runs on its own thread)
     HttpServer server(registry, reader, writer, database);
     server.set_web_dir(cfg.web_dir);
+    server.set_power_pipeline(&power_pipeline);
+
+    // Resolve config path for saving
+    std::string config_file_path;
+    if (!cfg.db_path.empty()) {
+        auto base = std::filesystem::path(cfg.db_path).parent_path();
+        config_file_path = (base / "config.json").string();
+    }
+    server.set_config(&runtime_cfg, config_file_path);
+
+    // Wire sampler to broadcast deltas via WebSocket
+    sampler.set_post_tick_callback([&server](MetricRegistry& r) {
+        auto snap = r.snapshot();
+        server.broadcast_delta(snap);
+        self_metrics().last_sample_time = now_unix();
+    });
 
     std::jthread server_thread([&server, &cfg]() {
         if (!server.listen(cfg.host, cfg.port)) {
@@ -153,6 +244,9 @@ static void run_application(const pulseport::Config& cfg) {
 
     // Final flush
     aggregator.flush_1m();
+
+    // Finalize today's energy on shutdown
+    aggregator.finalize_daily(get_today_str(), reader);
 
     // Log shutdown event
     writer.write_event(now_unix(), "info", "lifecycle", "PulsePort service stopped");

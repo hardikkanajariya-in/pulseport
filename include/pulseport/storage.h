@@ -89,6 +89,15 @@ public:
     /// Delete all history, preserving config. Returns total rows deleted.
     int delete_all_history();
 
+    /// Purge rows older than retention limits. Returns total rows deleted.
+    struct RetentionConfig {
+        int retention_1m_days     = 90;
+        int retention_15m_days    = 365;
+        int retention_daily_days  = 365;
+        int retention_events_days = 365;
+    };
+    int cleanup_expired(const RetentionConfig& rc);
+
 private:
     sqlite3* db_;
 };

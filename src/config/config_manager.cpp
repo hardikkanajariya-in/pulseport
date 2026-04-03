@@ -22,7 +22,14 @@ void to_json(nlohmann::json& j, const Config& c) {
         {"sample_interval_ms",   c.sample_interval_ms},
         {"process_interval_ms",  c.process_interval_ms},
         {"thermal_interval_ms",  c.thermal_interval_ms},
-        {"aggregation_interval_s", c.aggregation_interval_s}
+        {"aggregation_interval_s", c.aggregation_interval_s},
+        {"alert_cpu_high_pct",      c.alert_cpu_high_pct},
+        {"alert_cpu_sustained_min", c.alert_cpu_sustained_min},
+        {"alert_mem_high_pct",      c.alert_mem_high_pct},
+        {"alert_mem_sustained_min", c.alert_mem_sustained_min},
+        {"alert_battery_low_pct",   c.alert_battery_low_pct},
+        {"alert_power_high_w",      c.alert_power_high_w},
+        {"alert_cooldown_minutes",  c.alert_cooldown_minutes}
     };
 }
 
@@ -38,6 +45,13 @@ void from_json(const nlohmann::json& j, Config& c) {
     if (j.contains("process_interval_ms"))   j.at("process_interval_ms").get_to(c.process_interval_ms);
     if (j.contains("thermal_interval_ms"))   j.at("thermal_interval_ms").get_to(c.thermal_interval_ms);
     if (j.contains("aggregation_interval_s")) j.at("aggregation_interval_s").get_to(c.aggregation_interval_s);
+    if (j.contains("alert_cpu_high_pct"))      j.at("alert_cpu_high_pct").get_to(c.alert_cpu_high_pct);
+    if (j.contains("alert_cpu_sustained_min")) j.at("alert_cpu_sustained_min").get_to(c.alert_cpu_sustained_min);
+    if (j.contains("alert_mem_high_pct"))      j.at("alert_mem_high_pct").get_to(c.alert_mem_high_pct);
+    if (j.contains("alert_mem_sustained_min")) j.at("alert_mem_sustained_min").get_to(c.alert_mem_sustained_min);
+    if (j.contains("alert_battery_low_pct"))   j.at("alert_battery_low_pct").get_to(c.alert_battery_low_pct);
+    if (j.contains("alert_power_high_w"))      j.at("alert_power_high_w").get_to(c.alert_power_high_w);
+    if (j.contains("alert_cooldown_minutes"))  j.at("alert_cooldown_minutes").get_to(c.alert_cooldown_minutes);
 }
 
 Config load_config(const std::filesystem::path& path) {

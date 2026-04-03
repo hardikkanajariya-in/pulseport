@@ -27,6 +27,15 @@ struct Config {
     int process_interval_ms   = 5000;
     int thermal_interval_ms   = 5000;
     int aggregation_interval_s = 60;
+
+    // Alert thresholds
+    double alert_cpu_high_pct      = 90.0;
+    int    alert_cpu_sustained_min = 5;
+    double alert_mem_high_pct      = 90.0;
+    int    alert_mem_sustained_min = 5;
+    double alert_battery_low_pct   = 15.0;
+    double alert_power_high_w      = 100.0;
+    int    alert_cooldown_minutes  = 30;
 };
 
 /// Load config from a JSON file. Missing fields use defaults.

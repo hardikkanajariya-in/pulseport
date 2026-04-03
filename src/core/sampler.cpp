@@ -98,6 +98,12 @@ void Sampler::run() {
                 }
             }
         }
+        if (post_tick_) {
+            try { post_tick_(registry_); }
+            catch (const std::exception& e) {
+                spdlog::error("Post-tick callback failed: {}", e.what());
+            }
+        }
     }
 #else
     // Non-Windows fallback (for future portability)
@@ -112,6 +118,12 @@ void Sampler::run() {
                 } catch (const std::exception& e) {
                     spdlog::error("Collector '{}' failed: {}", col.name, e.what());
                 }
+            }
+        }
+        if (post_tick_) {
+            try { post_tick_(registry_); }
+            catch (const std::exception& e) {
+                spdlog::error("Post-tick callback failed: {}", e.what());
             }
         }
     }

@@ -27,6 +27,9 @@ public:
     /// Signal stop and join the sampling thread.
     void stop();
 
+    /// Set a callback that runs after every base tick (1s).
+    void set_post_tick_callback(CollectorFn fn) { post_tick_ = std::move(fn); }
+
     bool running() const { return running_.load(std::memory_order_acquire); }
 
 private:
@@ -42,6 +45,7 @@ private:
     MetricRegistry& registry_;
     std::atomic<bool> running_{false};
     std::vector<Collector> collectors_;
+    CollectorFn post_tick_;
     void* timer_handle_ = nullptr;  // HANDLE (Windows waitable timer)
     void* thread_handle_ = nullptr; // std::jthread stored opaquely
 };
