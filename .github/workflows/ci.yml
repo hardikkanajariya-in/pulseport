@@ -36,7 +36,7 @@ jobs:
         run: pnpm run build
 
       - name: Upload frontend dist
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: frontend-dist
           path: web/dist/
@@ -88,7 +88,7 @@ jobs:
         run: ctest --test-dir build --config Release --output-on-failure
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pulseport-service
           path: build/Release/pulseport-service.exe
